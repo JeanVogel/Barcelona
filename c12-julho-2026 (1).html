@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caderno do Membro — Julho 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6EE;
+  --paper-2:#F1E9DA;
+  --card:#FFFFFF;
+  --ink:#112A3A;
+  --ink-soft:#456073;
+  --rule:#DFD4C1;
+  --gold:#B07B22;
+  --gold-soft:#E8C98A;
+  --rail:#0E2432;
+  --rail-ink:#DCE7ED;
+  --rail-dim:#7E9AAA;
+  --good:#2F6B4F;
+  --warn:#9A5B1E;
+  --bad:#8C3130;
+  --shadow:0 1px 0 rgba(17,42,58,.06);
+  --radius:6px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D181F;
+    --paper-2:#132430;
+    --card:#152731;
+    --ink:#E9E2D4;
+    --ink-soft:#9FB4C0;
+    --rule:#283C48;
+    --gold:#DFAE58;
+    --gold-soft:#5C4620;
+    --rail:#08141C;
+    --rail-ink:#D9E5EC;
+    --rail-dim:#6C8698;
+    --good:#7CC39C;
+    --warn:#D9A05B;
+    --bad:#D98A86;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D181F; --paper-2:#132430; --card:#152731; --ink:#E9E2D4; --ink-soft:#9FB4C0;
+  --rule:#283C48; --gold:#DFAE58; --gold-soft:#5C4620; --rail:#08141C; --rail-ink:#D9E5EC;
+  --rail-dim:#6C8698; --good:#7CC39C; --warn:#D9A05B; --bad:#D98A86; --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Fraunces","Iowan Old Style",Georgia,serif;font-weight:600;line-height:1.15;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}
+
+/* ---------- shell ---------- */
+.app{display:grid;grid-template-columns:268px 1fr;min-height:100vh}
+.rail{
+  background:var(--rail);color:var(--rail-ink);
+  display:flex;flex-direction:column;gap:2px;
+  padding:26px 18px 22px;position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.brand{margin-bottom:22px}
+.brand .kicker{font-size:12.5px;letter-spacing:.09em;color:var(--rail-dim)}
+.brand h1{font-size:25px;color:#fff;margin-top:4px;letter-spacing:-.01em}
+.brand .sub{font-size:13px;color:var(--rail-dim);margin-top:6px}
+.navbtn{
+  display:flex;align-items:baseline;gap:10px;width:100%;text-align:left;
+  background:none;border:0;color:var(--rail-ink);opacity:.72;
+  padding:9px 10px;border-radius:5px;cursor:pointer;
+}
+.navbtn:hover{opacity:1;background:rgba(255,255,255,.06)}
+.navbtn[aria-current="true"]{opacity:1;background:rgba(255,255,255,.1);box-shadow:inset 2px 0 0 var(--gold-soft)}
+.navbtn .idx{font-family:"Fraunces",serif;font-size:13px;color:var(--rail-dim);width:14px;flex:none}
+.navbtn .lbl{font-size:14.5px}
+.navbtn .dot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);flex:none;align-self:center}
+.navbtn .dot.on{background:var(--gold-soft)}
+.railfoot{margin-top:auto;padding-top:22px;font-size:12.5px;color:var(--rail-dim)}
+.prog{height:3px;background:rgba(255,255,255,.14);border-radius:2px;margin:10px 0 8px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--gold-soft);width:0%;transition:width .3s ease}
+.railfoot button{background:none;border:1px solid rgba(255,255,255,.2);color:var(--rail-dim);
+  padding:5px 9px;border-radius:4px;cursor:pointer;font-size:12px;margin-top:10px}
+.railfoot button:hover{color:#fff;border-color:rgba(255,255,255,.45)}
+
+.main{padding:0 0 90px}
+.wrap{max-width:820px;margin:0 auto;padding:40px 32px 0}
+.sheet{display:none}
+.sheet.on{display:block}
+
+/* ---------- typography blocks ---------- */
+.eyebrow{font-size:13px;color:var(--gold);font-family:"Fraunces",serif;font-style:italic}
+.sheet > header{border-bottom:1px solid var(--rule);padding-bottom:18px;margin-bottom:28px}
+.sheet > header h2{font-size:34px;letter-spacing:-.015em;margin-top:6px}
+.sheet > header p{color:var(--ink-soft);margin:10px 0 0;max-width:62ch;font-size:15px}
+section.blk{margin:0 0 38px}
+section.blk > h3{font-size:21px;margin-bottom:6px}
+section.blk > .hint{color:var(--ink-soft);font-size:14.5px;margin:0 0 16px;max-width:64ch}
+.verse{
+  border-left:2px solid var(--gold);padding:2px 0 2px 16px;margin:0 0 22px;
+  font-family:"Fraunces",serif;font-style:italic;font-size:17px;color:var(--ink);max-width:60ch
+}
+.verse cite{display:block;font-style:normal;font-size:13px;color:var(--gold);margin-top:8px;letter-spacing:.04em}
+
+/* ---------- fields ---------- */
+label.q{display:block;margin:0 0 7px;font-size:15px;font-weight:500}
+textarea{
+  width:100%;background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:11px 13px;min-height:88px;resize:vertical;box-shadow:var(--shadow);line-height:1.5;
+}
+input[type=text],input[type=number],select{
+  background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);
+  padding:9px 11px;box-shadow:var(--shadow);width:100%;
+}
+textarea:focus,input:focus,select:focus{border-color:var(--gold)}
+.field{margin:0 0 20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+
+/* ---------- wheel ---------- */
+.wheelwrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px;align-items:start}
+@media(max-width:860px){.wheelwrap{grid-template-columns:1fr}}
+.wheelcard{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:8px;box-shadow:var(--shadow)}
+svg.wheel{width:100%;height:auto;display:block}
+.slider{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;margin-bottom:11px}
+.slider .nm{font-size:14px}
+.slider .val{font-family:"Fraunces",serif;font-size:15px;color:var(--gold);min-width:20px;text-align:right}
+input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--gold);margin:2px 0 0;padding:0;border:0;box-shadow:none;background:none}
+.summary{background:var(--paper-2);border-radius:8px;padding:14px 16px;font-size:14.5px;margin-top:8px}
+.summary b{font-family:"Fraunces",serif;font-weight:600}
+.summary ul{margin:4px 0 12px;padding-left:18px}
+.summary li{margin:2px 0}
+
+/* ---------- segmented ---------- */
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--card)}
+.seg button{background:none;border:0;padding:6px 13px;font-size:13.5px;cursor:pointer;color:var(--ink-soft);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--gold);color:#fff}
+.row5{display:flex;justify-content:space-between;gap:14px;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.row5 .txt{flex:1 1 300px}
+.row5 .txt b{display:block;font-size:15.5px;font-weight:700}
+.row5 .txt span{font-size:13.5px;color:var(--ink-soft)}
+
+/* ---------- assessment ---------- */
+.agroup{margin-bottom:6px}
+.agroup h4{background:var(--rail);color:#fff;font-size:14.5px;padding:8px 13px;border-radius:5px 5px 0 0;font-weight:600}
+.aitem{display:flex;gap:14px;align-items:center;padding:11px 13px;border:1px solid var(--rule);border-top:0;background:var(--card)}
+.agroup .aitem:last-child{border-radius:0 0 5px 5px}
+.aitem p{margin:0;flex:1;font-size:14.5px}
+.aitem select{width:62px;flex:none;padding:6px 6px}
+.scorebar{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--paper-2);
+  border-radius:8px;padding:14px 18px;margin-top:18px}
+.scorebar .big{font-family:"Fraunces",serif;font-size:38px;line-height:1}
+.scorebar .band{font-size:14.5px;flex:1 1 260px}
+.scorebar .band b{display:block;font-size:16px}
+
+/* ---------- calculators ---------- */
+.calc{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:18px 20px;margin-bottom:18px;box-shadow:var(--shadow)}
+.calc h4{font-size:17px;margin-bottom:4px}
+.calc .formula{font-size:13px;color:var(--ink-soft);margin:0 0 16px}
+.calcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.calcgrid label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:4px}
+.out{margin-top:16px;padding-top:14px;border-top:1px dashed var(--rule);display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+.out .num{font-family:"Fraunces",serif;font-size:32px;color:var(--gold);line-height:1}
+.out .note{font-size:14px;color:var(--ink-soft);flex:1 1 220px}
+
+/* ---------- checklists / accordion ---------- */
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:14.5px;cursor:pointer}
+.check input{margin:4px 0 0;flex:none;width:16px;height:16px;accent-color:var(--gold)}
+.acc{border:1px solid var(--rule);border-radius:8px;margin-bottom:10px;background:var(--card);overflow:hidden}
+.acc > button{width:100%;display:flex;gap:12px;align-items:center;background:none;border:0;
+  padding:13px 16px;cursor:pointer;text-align:left}
+.acc > button .t{font-family:"Fraunces",serif;font-size:16.5px;flex:1}
+.acc > button .mk{color:var(--gold);font-size:13px}
+.acc .body{padding:0 16px 16px;display:none}
+.acc.open .body{display:block}
+.steps{counter-reset:s}
+.step{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--rule)}
+.step .n{font-family:"Fraunces",serif;color:var(--gold);font-size:15px;flex:none;width:58px}
+.step .c{flex:1}
+.step .c b{font-size:16px}
+.step .c p{margin:4px 0 10px;font-size:14.5px;color:var(--ink-soft)}
+
+.tasks .task{display:grid;grid-template-columns:1fr 150px;gap:12px;margin-bottom:12px}
+@media(max-width:640px){.tasks .task{grid-template-columns:1fr}}
+
+/* ---------- footer nav ---------- */
+.pager{max-width:820px;margin:0 auto;padding:28px 32px 0;display:flex;justify-content:space-between;
+  gap:12px;border-top:1px solid var(--rule)}
+.pager button{background:none;border:1px solid var(--rule);border-radius:6px;padding:9px 16px;
+  cursor:pointer;font-size:14.5px}
+.pager button:hover{border-color:var(--gold);color:var(--gold)}
+.pager button[disabled]{opacity:.35;cursor:default}
+.btn-primary{background:var(--gold);color:#fff;border:0;border-radius:6px;padding:11px 20px;
+  cursor:pointer;font-size:15px;font-weight:500}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{background:none;border:1px solid var(--rule);border-radius:6px;padding:11px 18px;cursor:pointer;font-size:15px}
+.btn-ghost:hover{border-color:var(--gold)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 8px}
+.status{font-size:13.5px;color:var(--ink-soft);min-height:20px;margin-top:6px}
+
+/* ---------- preview ---------- */
+.preview{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:26px 28px;
+  max-height:520px;overflow:auto;box-shadow:var(--shadow)}
+.preview h4{font-size:17px;margin:22px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--rule)}
+.preview h4:first-child{margin-top:0}
+.preview dl{margin:0}
+.preview dt{font-size:13.5px;color:var(--ink-soft);margin-top:11px}
+.preview dd{margin:2px 0 0;font-size:14.5px;white-space:pre-wrap}
+.preview dd.empty{color:var(--ink-soft);font-style:italic}
+
+/* ---------- mobile ---------- */
+.mobtop{display:none}
+@media(max-width:880px){
+  .app{grid-template-columns:1fr}
+  .rail{display:none}
+  .mobtop{display:block;position:sticky;top:0;z-index:5;background:var(--rail);color:var(--rail-ink);padding:12px 18px}
+  .mobtop .r{display:flex;align-items:center;gap:12px}
+  .mobtop h1{font-size:18px;color:#fff;flex:1}
+  .mobtop select{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;width:auto;box-shadow:none}
+  .mobtop select option{color:#111}
+  .wrap{padding:26px 18px 0}
+  .pager{padding:24px 18px 0}
+  .sheet > header h2{font-size:27px}
+}
+</style>
+</head>
+<body>
+
+<div class="mobtop">
+  <div class="r">
+    <h1>Caderno do Membro</h1>
+    <select id="mobnav" aria-label="Ir para a seção"></select>
+  </div>
+  <div class="prog"><i id="progM"></i></div>
+</div>
+
+<div class="app">
+  <nav class="rail">
+    <div class="brand">
+      <div class="kicker">C12 · Fórum de Julho</div>
+      <h1>Lealdade</h1>
+      <div class="sub">Caderno de trabalho do Membro — Julho 2026</div>
+    </div>
+    <div id="nav"></div>
+    <div class="railfoot">
+      <div class="prog"><i id="progD"></i></div>
+      <span id="progTxt">0% preenchido</span>
+      <div><button id="clear" type="button">Apagar respostas</button></div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="wrap" id="sheets"></div>
+    <div class="pager">
+      <button id="prev" type="button">← Anterior</button>
+      <button id="next" type="button">Próxima →</button>
+    </div>
+  </main>
+</div>
+
+<script>
+/* =========================================================
+   Conteúdo (roteiro do fórum de julho/2026 — C12 Brasil)
+   ========================================================= */
+const WHEEL = [
+  "Caminhada com Deus","Discipulando outros","Casamento & família","Finanças pessoais",
+  "Descanso & pausa","Exercícios & nutrição","Diversão & recreação","Comunidade bíblica"
+];
+
+const FIVE = [
+  {k:"receita", t:"Geração de receita", d:"Vendas, marketing, linha de produtos/serviços e relacionamento com o cliente."},
+  {k:"operacional", t:"Gerenciamento operacional", d:"Fornecedores, atendimento, tecnologia e administração."},
+  {k:"organizacional", t:"Gerenciamento organizacional", d:"Recrutamento e seleção, treinamento e sucessão."},
+  {k:"financeiro", t:"Gerenciamento financeiro", d:"Metas, projeções, métricas, controles, relatórios e caixa."},
+  {k:"ministerio", t:"Ministério", d:"Impacto no Reino através da empresa: conversões, ministrações, discipulados."}
+];
+const META = ["Abaixo da meta","Na meta","Acima da meta"];
+
+const DEV_Q = [
+  "A lealdade de Rute abriu portas que ela não imaginava. Onde você viu Deus honrar a lealdade em meio à dificuldade — na sua vida ou na de alguém próximo?",
+  "Se alguém observasse a sua rotina, diria que você é mais dedicado a quê? Que sinais práticos mostram aos outros onde está o seu compromisso?",
+  "Deus permanece fiel mesmo quando falhamos. Como essa verdade encoraja você nos momentos em que a sua devoção vacila?"
+];
+
+const ASSESS = [
+  {g:"Experiência e serviço ao cliente", items:[
+    "Entregamos com consistência produtos e serviços que atendem ou superam a expectativa do cliente.",
+    "Registramos e respondemos rapidamente a dúvidas e reclamações.",
+    "A equipe é treinada para priorizar o atendimento em todos os pontos de contato.",
+    "Procuramos o cliente de forma proativa para checar a satisfação dele."]},
+  {g:"Escuta e engajamento", items:[
+    "Coletamos feedback com regularidade (pesquisas, avaliações ou conversas diretas).",
+    "Analisamos esse feedback e o transformamos em melhorias reais.",
+    "O cliente se sente ouvido quando traz uma preocupação ou sugestão.",
+    "Mantemos presença ativa nas redes e em outros canais de relacionamento."]},
+  {g:"Reputação da marca e lealdade", items:[
+    "Temos uma base sólida de clientes recorrentes que confiam na marca.",
+    "Nosso marketing reflete o compromisso real com a satisfação do cliente.",
+    "Acompanhamos avaliações on-line e respondemos com profissionalismo, elogios ou críticas.",
+    "Nossos clientes sentem conexão pessoal com a nossa marca e os nossos valores."]},
+  {g:"Métricas e impacto no negócio", items:[
+    "A equipe entende a relação entre satisfação do cliente e desempenho financeiro.",
+    "Medimos e acompanhamos o NPS periodicamente.",
+    "Conhecemos o CLV por segmento e usamos isso nas decisões de negócio.",
+    "Comparamos o CAC com o CLV para garantir crescimento sustentável."]}
+];
+
+const BANDS = [
+  {min:65, t:"Excelente", d:"O negócio já prioriza satisfação e lealdade. Continue refinando para manter esses relacionamentos."},
+  {min:50, t:"Bom, com espaço para melhorar", d:"Concentre-se nas afirmações de menor nota e monte um plano para a experiência do cliente."},
+  {min:35, t:"Razoável", d:"Há oportunidades sendo perdidas. Vale implantar um sistema de feedback mais robusto."},
+  {min:0,  t:"Atenção urgente", d:"Reavalie as estratégias de atendimento e construa um plano de ação para satisfação e lealdade."}
+];
+
+const NPS_BENCH = [
+  ["Consultoria",42,48,72],["Educação",38,60,75],["Finanças",34,59,80],["Serviços financeiros",35,60,78],
+  ["Governo",38,62,80],["Saúde",37,62,82],["Seguros",36,65,86],["ONGs",41,63,79],
+  ["Imobiliário",32,58,78],["Varejo",36,57,74],["Tecnologia",22,50,70],["Transporte",20,44,67]
+];
+
+const METRIC_Q = [
+  "Como você mede ou estima o CLV hoje, e como isso alimenta decisões de preço, retenção ou investimento em atendimento?",
+  "O que você faz para monitorar o CAC, e como sabe se ele está alto demais?",
+  "Como NPS, CLV e CAC se combinam para lhe dar uma visão completa do cliente?"
+];
+
+const STRAT = [
+  {t:"Oferecer experiências excepcionais", tasks:[
+    "Investir em contatos personalizados que façam o cliente se sentir valorizado.",
+    "Garantir serviço rápido e eficiente, reduzindo pontos de atrito.",
+    "Usar o feedback do cliente para melhorar processos continuamente."]},
+  {t:"Construir confiança e credibilidade", tasks:[
+    "Ser transparente em práticas, preços e comunicação.",
+    "Honrar compromissos e cumprir promessas.",
+    "Incentivar avaliações e depoimentos autênticos."]},
+  {t:"Criar conexões emocionais", tasks:[
+    "Treinar a equipe em empatia e escuta ativa.",
+    "Compartilhar os valores e a missão da empresa com o cliente.",
+    "Celebrar marcos do cliente: aniversários e conquistas."]},
+  {t:"Engajar clientes por meio de relacionamentos", tasks:[
+    "Criar iniciativas de comunidade que envolvam clientes.",
+    "Implantar programa de fidelidade que reconheça mais do que a compra.",
+    "Usar redes sociais e contato direto para nutrir o relacionamento."]},
+  {t:"Fomentar uma cultura centrada no cliente", tasks:[
+    "Dar autonomia à equipe para resolver problemas na hora.",
+    "Abrir canais claros para capturar e agir sobre o feedback.",
+    "Treinar continuamente reforçando valores centrados no cliente."]},
+  {t:"Alinhar-se aos valores do cliente", tasks:[
+    "Apoiar causas que façam sentido para o seu público.",
+    "Destacar responsabilidade corporativa na mensagem da marca.",
+    "Operar com integridade e princípios de fé nas práticas comerciais."]},
+  {t:"Incentivar defesa e indicações", tasks:[
+    "Criar programa de indicação que recompense quem traz novos clientes.",
+    "Pedir avaliações e depoimentos a clientes satisfeitos.",
+    "Formar uma comunidade onde clientes leais troquem experiências."]}
+];
+
+const SYNC_BIZ = [
+  "Quais são as reclamações mais comuns dos clientes, e o que nos impede de resolvê-las de vez?",
+  "Com que frequência procuramos o cliente antes que ele traga o problema?",
+  "Se pudéssemos melhorar uma única coisa na experiência do cliente nos próximos 90 dias, o que teria mais impacto?"
+];
+
+const CONCERNS = [
+  {q:"Impacto financeiro de manter um fundo", items:[
+    "Alocar recursos pode afetar o resultado ou a lucratividade.",
+    "O fundo pode ser usado mais do que o previsto, criando pressão e dependência.",
+    "Não sei quanto alocar nem se o valor se sustenta no longo prazo."]},
+  {q:"Financiamento e participação ao longo do tempo", items:[
+    "Não sei se o melhor caminho é contribuição voluntária, verba da empresa ou doação externa.",
+    "Não sei como comunicar o propósito de forma que ressoe com equipe e liderança.",
+    "O entusiasmo inicial pode diminuir e as contribuições podem cair."]},
+  {q:"Justiça e transparência", items:[
+    "Podem surgir mal-entendidos sobre quem se qualifica para receber.",
+    "Não sei como definir critérios de elegibilidade claros e objetivos.",
+    "A distribuição pode gerar divisão ou ressentimento entre os funcionários."]},
+  {q:"Administração e conformidade legal", items:[
+    "Pode haver implicações trabalhistas ou fiscais que compliquem a iniciativa.",
+    "Não sei como conduzir solicitações e aprovações de auxílio.",
+    "Criar e administrar o fundo pode ser oneroso demais para a nossa equipe."]}
+];
+
+const MIN_REFLEX = [
+  "O que teria acontecido se a situação de Sarah tivesse ocorrido na sua empresa?",
+  "Quem estaria envolvido na resposta à crise, dentro e fora da empresa?",
+  "Que estruturas ou políticas você já tem para apoiar um funcionário financeira, emocional e profissionalmente?",
+  "O que Jesus gostaria que você fizesse como líder nessa situação?",
+  "Que próximos passos dariam conta de um cuidado financeiro e prático para a sua equipe e o seu círculo de influência?"
+];
+
+const STEPS = [
+  {t:"Defina o propósito e o escopo", d:"A quem o fundo atende (funcionários, famílias, fornecedores, comunidade) e que necessidades cobre. Decida se será explicitamente baseado na fé."},
+  {t:"Identifique fontes de financiamento", d:"Combine contribuição da empresa, doação voluntária da equipe, campanhas e doações externas. Diversificar traz estabilidade."},
+  {t:"Estabeleça critérios de elegibilidade e distribuição", d:"Quem se qualifica, como o pedido é feito e revisado, e quais os limites por solicitação ou por ano."},
+  {t:"Monte a estrutura de administração e supervisão", d:"Comitê de governança, conformidade legal e fiscal, confidencialidade de quem recebe e relatórios transparentes."},
+  {t:"Comunique e promova o engajamento", d:"Avisos internos, testemunhos com permissão e espaço para a equipe participar das decisões e da arrecadação."},
+  {t:"Garanta a sustentabilidade", d:"Reavalie o escopo periodicamente, mantenha as fontes diversificadas e integre o fundo à cultura e à integração de novos líderes."}
+];
+
+const SYNC_MIN = [
+  "Qual é o primeiro passo concreto para avançar com o fundo de cuidado, e em que prazo?",
+  "Que obstáculos devemos antecipar, e como tratá-los de forma proativa?",
+  "Como integrar o fundo à cultura da empresa de modo que reflita nossos valores?"
+];
+
+/* =========================================================
+   Estado
+   ========================================================= */
+const KEY = "c12-jul2026-v1";
+let S = {};
+try{ const raw = localStorage.getItem(KEY); if(raw) S = JSON.parse(raw)||{}; }catch(e){ S = {}; }
+let saveT=null;
+function save(){
+  clearTimeout(saveT);
+  saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} },250);
+}
+const g=(k,d)=>S[k]!==undefined&&S[k]!==null?S[k]:d;
+function set(k,v){ S[k]=v; save(); refresh(); }
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const brl=n=>isFinite(n)?n.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0}):"—";
+
+/* =========================================================
+   Seções
+   ========================================================= */
+const SECTIONS = [
+  {id:"panorama", nav:"Panorama do Membro", title:"Panorama geral do Membro",
+   eyebrow:"Vida & liderança", lead:"Avalie como está a sua vida e o seu negócio antes da conversa em grupo. As notas alimentam a roda e o resumo final.", build:buildPanorama},
+  {id:"devocional", nav:"Devocional", title:"Lealdade que resiste ao teste do tempo",
+   eyebrow:"Devocional · Rute 1:16", lead:"A lealdade é fácil quando a vida está tranquila; a devoção verdadeira é testada na dificuldade.", build:buildDevocional},
+  {id:"negocios", nav:"Negócios", title:"Cultivando a lealdade do cliente",
+   eyebrow:"Negócios", lead:"Avalie a satisfação dos seus clientes, calcule as três métricas que importam e escolha as estratégias que vai aplicar.", build:buildNegocios},
+  {id:"ministerio", nav:"Ministério", title:"Como criar um fundo de cuidado",
+   eyebrow:"Ministério", lead:"Uma estrutura para apoiar pessoas em momentos de crise, com cuidado financeiro, emocional e relacional.", build:buildMinisterio},
+  {id:"aplicacao", nav:"Guia de aplicação", title:"Fazer &gt; falar",
+   eyebrow:"Guia de aplicação", lead:"Prioridade é o que fazemos; o resto é conversa. Registre aqui o que sai deste fórum.", build:buildAplicacao},
+  {id:"resumo", nav:"Resumo & exportar", title:"Seu caderno preenchido",
+   eyebrow:"Encerramento", lead:"Revise tudo o que você registrou e gere o documento para levar, arquivar ou compartilhar com a sua equipe.", build:buildResumo}
+];
+
+/* ---------- helpers de campo ---------- */
+function ta(k, q, ph){
+  return `<div class="field"><label class="q" for="f_${k}">${q}</label>
+    <textarea id="f_${k}" data-k="${k}" placeholder="${ph||""}">${esc(g(k,""))}</textarea></div>`;
+}
+function txt(k, q, ph){
+  return `<div class="field"><label class="q" for="f_${k}">${q}</label>
+    <input type="text" id="f_${k}" data-k="${k}" placeholder="${ph||""}" value="${esc(g(k,""))}"></div>`;
+}
+function num(k, lbl, ph){
+  return `<div><label for="f_${k}">${lbl}</label>
+    <input type="number" id="f_${k}" data-k="${k}" data-num="1" placeholder="${ph||""}" value="${esc(g(k,""))}"></div>`;
+}
+function chk(k, label){
+  return `<label class="check"><input type="checkbox" data-k="${k}" ${g(k,false)?"checked":""}><span>${label}</span></label>`;
+}
+
+/* ---------- 1. Panorama ---------- */
+function buildPanorama(){
+  let s = `<section class="blk"><div class="grid2">
+      ${txt("p_nome","Seu nome")}${txt("p_empresa","Empresa")}
+    </div></section>`;
+
+  s += `<section class="blk"><h3>Roda de equilíbrio</h3>
+    <p class="hint">“Cada um de nós prestará contas de si mesmo a Deus.” — Romanos 14:12. Dê uma nota de 1 a 10 para cada área.</p>
+    <div class="wheelwrap">
+      <div class="wheelcard"><div id="wheel"></div></div>
+      <div>`;
+  WHEEL.forEach((n,i)=>{
+    const k="w"+i, v=g(k,5);
+    s+=`<div class="slider"><span class="nm">${n}</span><span class="val" id="wv${i}">${v}</span>
+      <input type="range" min="1" max="10" step="1" data-k="${k}" data-num="1" value="${v}" aria-label="${n}"></div>`;
+  });
+  s+=`<div class="summary" id="wheelSum"></div></div></div></section>`;
+
+  s+=`<section class="blk"><h3>Compartilhe com o grupo</h3>
+    <p class="hint">As áreas mais altas e mais baixas já vêm da roda. Complete com o que você quer levar para a conversa.</p>
+    ${ta("p_evol","Áreas que tiveram evolução desde o último encontro")}
+    ${ta("p_orient","Áreas nas quais você gostaria de orientação")}
+    ${ta("p_vitorias","Vitórias e acontecimentos relevantes")}
+  </section>`;
+
+  s+=`<section class="blk"><h3>Avaliação de 5 pontos</h3>
+    <p class="hint">Como está cada frente do negócio neste mês?</p>`;
+  FIVE.forEach(f=>{
+    const cur=g("m_"+f.k,null);
+    s+=`<div class="row5"><div class="txt"><b>${f.t}</b><span>${f.d}</span></div>
+      <div class="seg" data-seg="m_${f.k}">`+
+      META.map((m,i)=>`<button type="button" data-v="${i}" aria-pressed="${cur===i}">${m}</button>`).join("")+
+      `</div></div>`;
+  });
+  s+=`<div style="margin-top:20px">${ta("m_obs","Observações sobre os 5 pontos")}</div></section>`;
+  return s;
+}
+
+function drawWheel(){
+  const host=document.getElementById("wheel"); if(!host) return;
+  const cx=210, cy=200, R=132, n=WHEEL.length;
+  const pt=(i,r)=>{const a=-Math.PI/2 + i*2*Math.PI/n; return [cx+r*Math.cos(a), cy+r*Math.sin(a)];};
+  let rings="";
+  for(let k=2;k<=10;k+=2){
+    const p=[...Array(n)].map((_,i)=>pt(i,R*k/10).map(x=>x.toFixed(1)).join(",")).join(" ");
+    rings+=`<polygon points="${p}" fill="none" stroke="var(--rule)" stroke-width="1"/>`;
+  }
+  let spokes="", labels="";
+  for(let i=0;i<n;i++){
+    const [x,y]=pt(i,R);
+    spokes+=`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--rule)" stroke-width="1"/>`;
+    const [lx,ly]=pt(i,R+22);
+    const anchor = Math.abs(lx-cx)<6 ? "middle" : (lx>cx?"start":"end");
+    const words=WHEEL[i].split(" ");
+    let lines=[words[0]]; for(let w=1;w<words.length;w++){ if((lines[lines.length-1]+" "+words[w]).length>14) lines.push(words[w]); else lines[lines.length-1]+=" "+words[w]; }
+    labels+=`<text x="${lx.toFixed(1)}" y="${(ly-(lines.length-1)*6).toFixed(1)}" text-anchor="${anchor}" font-size="11.5" fill="var(--ink-soft)" font-family="Karla,sans-serif">`+
+      lines.map((l,j)=>`<tspan x="${lx.toFixed(1)}" dy="${j?13:0}">${esc(l)}</tspan>`).join("")+`</text>`;
+  }
+  const vals=WHEEL.map((_,i)=>Number(g("w"+i,5)));
+  const poly=vals.map((v,i)=>pt(i,R*v/10).map(x=>x.toFixed(1)).join(",")).join(" ");
+  const dots=vals.map((v,i)=>{const [x,y]=pt(i,R*v/10);return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.5" fill="var(--gold)"/>`;}).join("");
+  host.innerHTML=`<svg class="wheel" viewBox="0 0 420 400" role="img" aria-label="Roda de equilíbrio">
+    ${rings}${spokes}
+    <polygon points="${poly}" fill="var(--gold)" fill-opacity="0.18" stroke="var(--gold)" stroke-width="2" stroke-linejoin="round"/>
+    ${dots}${labels}
+  </svg>`;
+  const sum=document.getElementById("wheelSum");
+  if(sum){
+    const idx=WHEEL.map((n,i)=>({n,v:vals[i]}));
+    const top=[...idx].sort((a,b)=>b.v-a.v).slice(0,3);
+    const low=[...idx].sort((a,b)=>a.v-b.v).slice(0,3);
+    const med=(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+    sum.innerHTML=`<b>Suas melhores áreas</b><ul>${top.map(x=>`<li>${x.n} — ${x.v}</li>`).join("")}</ul>
+      <b>Suas áreas mais frágeis</b><ul>${low.map(x=>`<li>${x.n} — ${x.v}</li>`).join("")}</ul>
+      <b>Média geral: ${med}</b>`;
+  }
+}
+
+/* ---------- 2. Devocional ---------- */
+function buildDevocional(){
+  let s=`<div class="verse">“Não me instes para que te deixe e me afaste de ti; porque, aonde quer que fores, irei eu… o teu povo é o meu povo, o teu Deus é o meu Deus.”<cite>Rute 1:16</cite></div>`;
+  s+=`<section class="blk"><p class="hint" style="font-size:15.5px;max-width:64ch">
+    Rute tinha todos os motivos para voltar ao que era familiar: viúva, futuro incerto, nenhuma obrigação de seguir.
+    Escolheu ficar. A lealdade dela era convicção, não conveniência — e apontava, no fim, para Deus.
+    Essa mesma lealdade é testada em nós quando surgem conflitos, tentações e mudanças de mercado.
+    Permanecer firme nesses momentos revela o nosso caráter.</p></section>`;
+  s+=`<section class="blk"><h3>Perguntas para reflexão</h3>`;
+  DEV_Q.forEach((q,i)=>{ s+=ta("dev"+i,q); });
+  s+=ta("dev_acao","Uma decisão de lealdade que você quer tomar neste mês","Concreta e com prazo.");
+  s+=`</section>`;
+  return s;
+}
+
+/* ---------- 3. Negócios ---------- */
+function buildNegocios(){
+  let s=`<section class="blk"><h3>Avaliação de satisfação do cliente</h3>
+    <p class="hint">Avalie cada afirmação de 1 a 5 (1 = discordo totalmente; 5 = concordo totalmente). O total é calculado automaticamente.</p>`;
+  let n=0;
+  ASSESS.forEach(grp=>{
+    s+=`<div class="agroup"><h4>${grp.g}</h4>`;
+    grp.items.forEach(it=>{
+      const k="a"+(n++);
+      s+=`<div class="aitem"><p>${it}</p>
+        <select data-k="${k}" data-num="1" aria-label="Nota">
+        <option value="">–</option>`+
+        [1,2,3,4,5].map(v=>`<option value="${v}" ${String(g(k,""))===String(v)?"selected":""}>${v}</option>`).join("")+
+        `</select></div>`;
+    });
+    s+=`</div>`;
+  });
+  s+=`<div class="scorebar"><div class="big" id="asTotal">0</div>
+      <div class="band" id="asBand"><b>Preencha as 16 afirmações</b>Total possível: 80 pontos.</div></div>`;
+  s+=`<div style="margin-top:22px">
+    ${ta("as_q1","O que esse resultado revela sobre a sua experiência com o cliente? Há lacunas que você ainda não tinha notado?")}
+    ${ta("as_q2","Quais notas chamaram a sua atenção, para o bem ou para o mal?")}
+    ${txt("as_q3","Quem na sua empresa é responsável por medir a lealdade do cliente?")}
+  </div></section>`;
+
+  /* NPS */
+  s+=`<section class="blk"><h3>As três métricas da lealdade</h3>
+    <p class="hint">Priorizar lealdade exige mensuração. Preencha com os seus números — os resultados entram no documento final.</p>
+    <div class="calc"><h4>NPS — Net Promoter Score</h4>
+      <p class="formula">NPS = % de promotores − % de detratores. Promotores dão 9–10, passivos 7–8, detratores 0–6.</p>
+      <div class="calcgrid">
+        ${num("nps_p","Promotores (9–10)","83")}
+        ${num("nps_n","Passivos (7–8)","52")}
+        ${num("nps_d","Detratores (0–6)","15")}
+        <div><label for="f_nps_ind">Seu setor</label>
+          <select id="f_nps_ind" data-k="nps_ind"><option value="">–</option>`+
+          NPS_BENCH.map(b=>`<option value="${b[0]}" ${g("nps_ind","")===b[0]?"selected":""}>${b[0]}</option>`).join("")+
+        `</select></div>
+      </div>
+      <div class="out"><span class="num" id="npsOut">—</span><span class="note" id="npsNote">Informe as respostas da sua última pesquisa.</span></div>
+    </div>
+
+    <div class="calc"><h4>CLV — valor vitalício de lucro do cliente</h4>
+      <p class="formula">CLV = lucro médio por compra × compras por ano × anos de relacionamento.</p>
+      <div class="calcgrid">
+        ${num("clv_l","Lucro médio por compra (R$)","1000")}
+        ${num("clv_f","Compras por ano","5")}
+        ${num("clv_a","Anos de relacionamento","10")}
+      </div>
+      <div class="out"><span class="num" id="clvOut">—</span><span class="note">Quanto maior, mais vale cada cliente retido — e mais se justifica investir em atendimento.</span></div>
+    </div>
+
+    <div class="calc"><h4>CAC — custo de aquisição de cliente</h4>
+      <p class="formula">CAC = custos totais de vendas e marketing ÷ novos clientes conquistados no período.</p>
+      <div class="calcgrid">
+        ${num("cac_c","Custos de vendas e marketing (R$)","600000")}
+        ${num("cac_n","Novos clientes no período","1500")}
+      </div>
+      <div class="out"><span class="num" id="cacOut">—</span><span class="note" id="ratioNote">A proporção CLV:CAC de pelo menos 3:1 é considerada saudável.</span></div>
+    </div>`;
+  METRIC_Q.forEach((q,i)=>{ s+=ta("met"+i,q); });
+  s+=`</section>`;
+
+  /* Estratégias */
+  s+=`<section class="blk"><h3>Sete estratégias para melhorar a lealdade</h3>
+    <p class="hint">Abra cada estratégia, marque as ações que você vai adotar e escreva o compromisso do mês.</p>`;
+  STRAT.forEach((st,i)=>{
+    const done=st.tasks.filter((_,j)=>g(`st${i}_${j}`,false)).length;
+    s+=`<div class="acc" data-acc="${i}"><button type="button">
+        <span class="t">${st.t}</span><span class="mk" data-count="${i}">${done}/${st.tasks.length}</span></button>
+      <div class="body">`+
+      st.tasks.map((t,j)=>chk(`st${i}_${j}`,t)).join("")+
+      `<div style="margin-top:10px">${txt("st"+i+"_nota","Meu compromisso nessa frente","Ex.: revisar o fluxo de pós-venda até 30/08")}</div>
+      </div></div>`;
+  });
+  s+=`</section>`;
+
+  s+=`<section class="blk"><h3>Reunião de sincronização com o CEO/Key Player</h3>`;
+  SYNC_BIZ.forEach((q,i)=>{ s+=ta("sb"+i,q); });
+  s+=`</section>`;
+
+  s+=`<section class="blk"><h3>Líderes búfalo estão sempre em movimento</h3>
+    ${txt("buf_membro","Membro do fórum com NPS, CLV ou CAC forte que você quer entrevistar")}
+    ${ta("buf_praticas","Melhores práticas que você extraiu dessa conversa")}
+  </section>`;
+  return s;
+}
+
+function calcNeg(){
+  let tot=0, filled=0;
+  for(let i=0;i<16;i++){ const v=Number(g("a"+i,0)); if(v){tot+=v;filled++;} }
+  const te=document.getElementById("asTotal"), be=document.getElementById("asBand");
+  if(te){ te.textContent=tot; }
+  if(be){
+    if(filled<16){ be.innerHTML=`<b>${filled} de 16 afirmações respondidas</b>Complete a avaliação para ver a interpretação.`; }
+    else{ const b=BANDS.find(x=>tot>=x.min); be.innerHTML=`<b>${b.t}</b>${b.d}`; }
+  }
+  const p=Number(g("nps_p",0)),ps=Number(g("nps_n",0)),d=Number(g("nps_d",0));
+  const totR=p+ps+d;
+  const no=document.getElementById("npsOut"), nn=document.getElementById("npsNote");
+  let nps=null;
+  if(no){
+    if(totR>0){
+      nps=Math.round((p/totR)*100 - (d/totR)*100);
+      no.textContent=nps;
+      let cls = nps<0?"Precisa de melhoria":nps<=30?"Bom":nps<=70?"Ótimo":"Excelente";
+      let extra="";
+      const ind=g("nps_ind","");
+      if(ind){ const b=NPS_BENCH.find(x=>x[0]===ind);
+        extra = nps>=b[3] ? ` No setor de ${ind}, você está no patamar alto (referência ${b[3]}).`
+              : nps>=b[2] ? ` No setor de ${ind}, você está acima da média (${b[2]}) e abaixo do topo (${b[3]}).`
+              : ` No setor de ${ind}, a média é ${b[2]} e o topo ${b[3]}.`;
+      }
+      nn.textContent=`${totR} respostas · ${Math.round(p/totR*100)}% promotores, ${Math.round(ps/totR*100)}% passivos, ${Math.round(d/totR*100)}% detratores. Faixa: ${cls}.${extra}`;
+    } else { no.textContent="—"; nn.textContent="Informe as respostas da sua última pesquisa."; }
+  }
+  const clv=Number(g("clv_l",0))*Number(g("clv_f",0))*Number(g("clv_a",0));
+  const co=document.getElementById("clvOut"); if(co) co.textContent = clv>0?brl(clv):"—";
+  const cac = Number(g("cac_n",0))>0 ? Number(g("cac_c",0))/Number(g("cac_n",0)) : 0;
+  const ko=document.getElementById("cacOut"); if(ko) ko.textContent = cac>0?brl(cac):"—";
+  const rn=document.getElementById("ratioNote");
+  if(rn){
+    if(cac>0&&clv>0){
+      const r=clv/cac;
+      rn.textContent=`Proporção CLV:CAC de ${r.toFixed(1)}:1 — ${r>=3?"dentro do patamar saudável (mínimo 3:1).":"abaixo do mínimo de 3:1 considerado saudável."}`;
+    } else rn.textContent="A proporção CLV:CAC de pelo menos 3:1 é considerada saudável.";
+  }
+  STRAT.forEach((st,i)=>{
+    const el=document.querySelector(`[data-count="${i}"]`);
+    if(el) el.textContent=`${st.tasks.filter((_,j)=>g(`st${i}_${j}`,false)).length}/${st.tasks.length}`;
+  });
+  return {nps, clv, cac, asTotal:tot, asFilled:filled};
+}
+
+/* ---------- 4. Ministério ---------- */
+function buildMinisterio(){
+  let s=`<div class="verse">“Quando o fizestes a um destes meus pequeninos irmãos, a mim o fizestes.”<cite>Mateus 25:40</cite></div>`;
+  s+=`<section class="blk"><p class="hint" style="font-size:15.5px;max-width:64ch">
+    Sarah é uma colaboradora dedicada. O marido dela acaba de ser diagnosticado com uma doença grave e as contas
+    médicas estão crescendo. Um fundo de cuidado é o mecanismo que permite à empresa responder a situações assim
+    com cuidado financeiro, emocional e relacional — sem improviso.</p>
+    <p class="hint" style="max-width:64ch">No Brasil não existe um modelo padronizado com benefícios fiscais amplos
+    para esse tipo de iniciativa. Os caminhos possíveis são o apoio direto e pontual da empresa, a doação por meio de
+    uma ONG, ou um fundo interno estruturado. Em qualquer deles, vale desenhar a estrutura com orientação jurídica e
+    contábil para evitar caracterização de habitualidade e risco trabalhista.</p></section>`;
+
+  s+=`<section class="blk"><h3>O que faz você hesitar?</h3>
+    <p class="hint">Marque as afirmações com as quais você se identifica.</p>`;
+  CONCERNS.forEach((c,i)=>{
+    s+=`<div class="agroup"><h4>${c.q}</h4><div style="border:1px solid var(--rule);border-top:0;border-radius:0 0 5px 5px;padding:6px 14px;background:var(--card)">`+
+      c.items.map((it,j)=>chk(`cc${i}_${j}`,it)).join("")+`</div></div><div style="height:12px"></div>`;
+  });
+  s+=`<div id="ccNote" class="summary"></div></section>`;
+
+  s+=`<section class="blk"><h3>Da crise à compaixão</h3>`;
+  MIN_REFLEX.forEach((q,i)=>{ s+=ta("mr"+i,q); });
+  s+=`</section>`;
+
+  s+=`<section class="blk"><h3>Seis passos para criar um fundo de cuidado</h3>
+    <p class="hint">Marque o que já existe na sua empresa e anote o próximo movimento de cada passo.</p><div class="steps">`;
+  STEPS.forEach((st,i)=>{
+    s+=`<div class="step"><div class="n">Passo ${i+1}</div><div class="c">
+      <b>${st.t}</b><p>${st.d}</p>
+      ${chk("sp"+i+"_ok","Já temos isso definido")}
+      ${txt("sp"+i+"_nota","Próximo movimento","Quem faz o quê, até quando")}
+    </div></div>`;
+  });
+  s+=`</div></section>`;
+
+  s+=`<section class="blk"><h3>Reunião de sincronização com o CEO/Key Player</h3>`;
+  SYNC_MIN.forEach((q,i)=>{ s+=ta("sm"+i,q); });
+  s+=`</section>`;
+  return s;
+}
+function calcMin(){
+  const el=document.getElementById("ccNote"); if(!el) return;
+  let n=0, groups=[];
+  CONCERNS.forEach((c,i)=>{ const k=c.items.filter((_,j)=>g(`cc${i}_${j}`,false)).length; n+=k; if(k) groups.push(`${c.q} (${k})`); });
+  if(!n) el.innerHTML=`<b>Nenhuma preocupação marcada</b>Se as suas respostas sugerem pouca preocupação, esta pode ser a hora de desenhar o fundo.`;
+  else el.innerHTML=`<b>${n} preocupação(ões) marcada(s)</b>Concentradas em: ${groups.join("; ")}. Considere qual é a mais urgente e busque orientação jurídica, contábil ou de quem já implantou algo parecido.`;
+}
+
+/* ---------- 5. Aplicação ---------- */
+function buildAplicacao(){
+  let s=`<div class="verse">“Não andem ansiosos por coisa alguma, mas em tudo… apresentem seus pedidos a Deus.”<cite>Filipenses 4:6</cite></div>`;
+  s+=`<section class="blk"><h3>Pontos de sincronização</h3>
+    <p class="hint">O que você precisa fazer ou conversar com a sua equipe depois deste fórum?</p>
+    ${ta("ap_sync","Conversas e decisões a levar para a equipe")}</section>`;
+
+  s+=`<section class="blk"><h3>Fazer &gt; falar</h3>
+    <p class="hint">Suas tarefas mais importantes a partir da experiência de hoje. Registre também no App do C12.</p><div class="tasks">`;
+  for(let i=0;i<5;i++){
+    s+=`<div class="task">
+      <div><input type="text" data-k="tk${i}" placeholder="Tarefa ${i+1}" value="${esc(g("tk"+i,""))}"></div>
+      <div><input type="text" data-k="tk${i}_prazo" placeholder="Prazo" value="${esc(g("tk"+i+"_prazo",""))}"></div>
+    </div>`;
+  }
+  s+=`</div></section>`;
+
+  s+=`<section class="blk"><h3>Agradecimentos e pedidos de oração</h3>
+    ${ta("ap_gratidao","Pelo que você é grato neste mês")}
+    ${ta("ap_oracao","Como o grupo pode orar por você")}
+    ${ta("ap_servir","Como você pode servir e orar pelos seus colegas")}
+  </section>`;
+  return s;
+}
+
+/* ---------- 6. Resumo ---------- */
+function buildResumo(){
+  return `<section class="blk">
+    <div class="actions">
+      <button class="btn-primary" id="dl" type="button">Baixar caderno preenchido</button>
+      <button class="btn-ghost" id="copy" type="button">Copiar como texto</button>
+    </div>
+    <div class="status" id="dlStatus">O arquivo sai em HTML: abre em qualquer navegador e pode ser impresso ou salvo como PDF.</div>
+  </section>
+  <section class="blk"><h3>Prévia</h3><div class="preview" id="prev"></div></section>`;
+}
+
+/* ---------- coleta das respostas ---------- */
+function collect(){
+  const c=calcNeg();
+  const D=[];
+  const vals=WHEEL.map((n,i)=>({n, v:Number(g("w"+i,5))}));
+  D.push({h:"Panorama geral do Membro", items:[
+    {q:"Roda de equilíbrio", a:vals.map(x=>`${x.n}: ${x.v}`).join(" · ")},
+    {q:"Média da roda", a:(vals.reduce((a,b)=>a+b.v,0)/vals.length).toFixed(1)},
+    {q:"Áreas que tiveram evolução", a:g("p_evol","")},
+    {q:"Áreas em que gostaria de orientação", a:g("p_orient","")},
+    {q:"Vitórias e acontecimentos relevantes", a:g("p_vitorias","")},
+    {q:"Avaliação de 5 pontos", a:FIVE.map(f=>{const v=g("m_"+f.k,null);return `${f.t}: ${v===null||v===undefined?"—":META[v]}`;}).join(" · ")},
+    {q:"Observações sobre os 5 pontos", a:g("m_obs","")}
+  ]});
+  D.push({h:"Devocional — Lealdade que resiste ao teste do tempo", items:
+    DEV_Q.map((q,i)=>({q, a:g("dev"+i,"")})).concat([{q:"Decisão de lealdade deste mês", a:g("dev_acao","")}])});
+
+  const asItems=[];
+  let n=0;
+  ASSESS.forEach(grp=>{ grp.items.forEach(it=>{ const v=g("a"+n,""); asItems.push(`${grp.g} — ${it} → ${v||"—"}`); n++; }); });
+  const band = c.asFilled===16 ? BANDS.find(x=>c.asTotal>=x.min) : null;
+  D.push({h:"Negócios — Cultivando a lealdade do cliente", items:[
+    {q:"Avaliação de satisfação (respostas)", a:asItems.join("\n")},
+    {q:"Pontuação total", a:`${c.asTotal} de 80${band?` — ${band.t}: ${band.d}`:" (avaliação incompleta)"}`},
+    {q:"O que os resultados revelam", a:g("as_q1","")},
+    {q:"Notas que se destacaram", a:g("as_q2","")},
+    {q:"Responsável por medir a lealdade do cliente", a:g("as_q3","")},
+    {q:"NPS", a:c.nps===null?"—":`${c.nps} (promotores ${g("nps_p","0")}, passivos ${g("nps_n","0")}, detratores ${g("nps_d","0")}${g("nps_ind","")?`; setor: ${g("nps_ind","")}`:""})`},
+    {q:"CLV", a:c.clv>0?`${brl(c.clv)} (lucro médio ${brl(Number(g("clv_l",0)))} × ${g("clv_f","0")} compras/ano × ${g("clv_a","0")} anos)`:"—"},
+    {q:"CAC", a:c.cac>0?`${brl(c.cac)}${c.clv>0?` · proporção CLV:CAC de ${(c.clv/c.cac).toFixed(1)}:1`:""}`:"—"}
+  ].concat(METRIC_Q.map((q,i)=>({q, a:g("met"+i,"")})))
+   .concat([{q:"Estratégias escolhidas", a:STRAT.map((st,i)=>{
+      const marked=st.tasks.filter((_,j)=>g(`st${i}_${j}`,false));
+      const nota=g("st"+i+"_nota","");
+      if(!marked.length && !nota) return null;
+      return `${st.t}\n` + marked.map(t=>`  • ${t}`).join("\n") + (nota?`\n  Compromisso: ${nota}`:"");
+    }).filter(Boolean).join("\n")}])
+   .concat(SYNC_BIZ.map((q,i)=>({q, a:g("sb"+i,"")})))
+   .concat([{q:"Membro a entrevistar (líderes búfalo)", a:g("buf_membro","")},
+            {q:"Melhores práticas extraídas", a:g("buf_praticas","")}])});
+
+  const cc=[];
+  CONCERNS.forEach((c2,i)=>{ c2.items.forEach((it,j)=>{ if(g(`cc${i}_${j}`,false)) cc.push(`${c2.q} — ${it}`); }); });
+  D.push({h:"Ministério — Como criar um fundo de cuidado", items:[
+    {q:"Preocupações marcadas", a:cc.join("\n")}
+  ].concat(MIN_REFLEX.map((q,i)=>({q, a:g("mr"+i,"")})))
+   .concat([{q:"Seis passos — situação atual", a:STEPS.map((st,i)=>
+      `Passo ${i+1} — ${st.t}: ${g("sp"+i+"_ok",false)?"já definido":"pendente"}${g("sp"+i+"_nota","")?` · próximo movimento: ${g("sp"+i+"_nota","")}`:""}`).join("\n")}])
+   .concat(SYNC_MIN.map((q,i)=>({q, a:g("sm"+i,"")})))});
+
+  const tasks=[];
+  for(let i=0;i<5;i++){ const t=g("tk"+i,""); if(t) tasks.push(`${t}${g("tk"+i+"_prazo","")?` — prazo: ${g("tk"+i+"_prazo","")}`:""}`); }
+  D.push({h:"Guia de aplicação", items:[
+    {q:"Pontos de sincronização", a:g("ap_sync","")},
+    {q:"Fazer > falar (tarefas)", a:tasks.join("\n")},
+    {q:"Agradecimentos", a:g("ap_gratidao","")},
+    {q:"Pedidos de oração", a:g("ap_oracao","")},
+    {q:"Como servir os colegas", a:g("ap_servir","")}
+  ]});
+  return D;
+}
+
+function renderPreview(){
+  const el=document.getElementById("prev"); if(!el) return;
+  el.innerHTML=collect().map(sec=>`<h4>${esc(sec.h)}</h4><dl>`+
+    sec.items.map(it=>`<dt>${esc(it.q)}</dt><dd class="${it.a?"":"empty"}">${it.a?esc(it.a):"não preenchido"}</dd>`).join("")+
+    `</dl>`).join("");
+}
+
+function exportHTML(){
+  const nome=g("p_nome","")||"";
+  const D=collect();
+  const body=D.map(sec=>`<section><h2>${esc(sec.h)}</h2>`+
+    sec.items.map(it=>`<div class="i"><p class="q">${esc(it.q)}</p><p class="a${it.a?"":" e"}">${it.a?esc(it.a):"—"}</p></div>`).join("")+
+    `</section>`).join("");
+  return `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<title>Caderno do Membro — Julho 2026</title>
+<style>
+body{font-family:Georgia,"Times New Roman",serif;color:#112A3A;max-width:720px;margin:36px auto;padding:0 24px;line-height:1.55}
+header{border-bottom:2px solid #B07B22;padding-bottom:14px;margin-bottom:28px}
+h1{font-size:26px;margin:0}
+header p{color:#456073;margin:6px 0 0;font-size:14px}
+h2{font-size:19px;margin:34px 0 12px;border-bottom:1px solid #DFD4C1;padding-bottom:6px}
+.i{margin:0 0 14px;page-break-inside:avoid}
+.q{font-family:Helvetica,Arial,sans-serif;font-size:12.5px;color:#456073;margin:0 0 3px}
+.a{margin:0;white-space:pre-wrap;font-size:15px}
+.a.e{color:#9aa7ae;font-style:italic}
+footer{margin-top:40px;border-top:1px solid #DFD4C1;padding-top:12px;font-size:12px;color:#7d8c96}
+@media print{body{margin:0}}
+</style></head><body>
+<header><h1>Caderno do Membro — Lealdade</h1>
+<p>Fórum C12 · Julho de 2026${nome?` · ${esc(nome)}`:""} · gerado em ${new Date().toLocaleDateString("pt-BR")}</p></header>
+${body}
+<footer>Conteúdo do currículo C12 de julho de 2026. Registre as suas tarefas também no App do C12.</footer>
+</body></html>`;
+}
+function exportText(){
+  return collect().map(sec=>`## ${sec.h}\n\n`+
+    sec.items.map(it=>`${it.q}\n${it.a||"—"}`).join("\n\n")).join("\n\n");
+}
+
+/* =========================================================
+   Render / navegação
+   ========================================================= */
+let cur=0;
+const sheetsEl=document.getElementById("sheets");
+const navEl=document.getElementById("nav");
+const mobEl=document.getElementById("mobnav");
+
+function renderAll(){
+  sheetsEl.innerHTML=SECTIONS.map((s,i)=>`<article class="sheet${i===cur?" on":""}" id="s_${s.id}">
+    <header><div class="eyebrow">${s.eyebrow}</div><h2>${s.title}</h2><p>${s.lead}</p></header>
+    ${s.build()}</article>`).join("");
+  navEl.innerHTML=SECTIONS.map((s,i)=>`<button class="navbtn" type="button" data-go="${i}" aria-current="${i===cur}">
+    <span class="idx">${i+1}</span><span class="lbl">${s.nav}</span><span class="dot" data-dot="${i}"></span></button>`).join("");
+  mobEl.innerHTML=SECTIONS.map((s,i)=>`<option value="${i}" ${i===cur?"selected":""}>${i+1}. ${s.nav}</option>`).join("");
+  bind();
+  refresh();
+}
+function go(i){
+  cur=Math.max(0,Math.min(SECTIONS.length-1,i));
+  document.querySelectorAll(".sheet").forEach((el,j)=>el.classList.toggle("on",j===cur));
+  document.querySelectorAll("[data-go]").forEach(b=>b.setAttribute("aria-current", String(Number(b.dataset.go)===cur)));
+  mobEl.value=String(cur);
+  document.getElementById("prev").disabled = cur===0;
+  document.getElementById("next").disabled = cur===SECTIONS.length-1;
+  try{ window.scrollTo(0,0); }catch(e){}
+  refresh();
+}
+
+/* progresso por seção */
+const FIELDS = {
+  0: ()=>["p_evol","p_orient","p_vitorias","m_obs"].concat(FIVE.map(f=>"m_"+f.k)),
+  1: ()=>DEV_Q.map((_,i)=>"dev"+i).concat(["dev_acao"]),
+  2: ()=>[...Array(16)].map((_,i)=>"a"+i).concat(["as_q1","as_q2","as_q3","nps_p","clv_l","cac_c"]).concat(METRIC_Q.map((_,i)=>"met"+i)).concat(SYNC_BIZ.map((_,i)=>"sb"+i)),
+  3: ()=>MIN_REFLEX.map((_,i)=>"mr"+i).concat(STEPS.map((_,i)=>"sp"+i+"_nota")).concat(SYNC_MIN.map((_,i)=>"sm"+i)),
+  4: ()=>["ap_sync","tk0","ap_gratidao","ap_oracao","ap_servir"],
+  5: ()=>[]
+};
+function refresh(){
+  drawWheel();
+  WHEEL.forEach((_,i)=>{const e=document.getElementById("wv"+i); if(e) e.textContent=g("w"+i,5);});
+  calcNeg(); calcMin(); renderPreview();
+  let all=0, done=0;
+  for(let i=0;i<5;i++){
+    const ks=FIELDS[i]();
+    const d=ks.filter(k=>{const v=g(k,""); return v!==""&&v!==null&&v!==undefined;}).length;
+    all+=ks.length; done+=d;
+    const dot=document.querySelector(`[data-dot="${i}"]`);
+    if(dot) dot.classList.toggle("on", d>=Math.ceil(ks.length*0.6));
+  }
+  const pct=all?Math.round(done/all*100):0;
+  ["progD","progM"].forEach(id=>{const e=document.getElementById(id); if(e) e.style.width=pct+"%";});
+  const pt=document.getElementById("progTxt"); if(pt) pt.textContent=pct+"% preenchido";
+}
+
+function bind(){
+  sheetsEl.querySelectorAll("[data-k]").forEach(el=>{
+    const k=el.dataset.k;
+    if(el.type==="checkbox"){ el.addEventListener("change",()=>set(k,el.checked)); return; }
+    if(el.type==="range"){ el.addEventListener("input",()=>set(k,Number(el.value))); return; }
+    const ev = el.tagName==="SELECT" ? "change" : "input";
+    el.addEventListener(ev,()=>{
+      const v = el.dataset.num ? (el.value===""?"":Number(el.value)) : el.value;
+      S[k]=v; save();
+      if(el.tagName==="TEXTAREA"||el.type==="text"){ scheduleRefresh(); } else refresh();
+    });
+  });
+  sheetsEl.querySelectorAll("[data-seg]").forEach(seg=>{
+    seg.addEventListener("click",e=>{
+      const b=e.target.closest("button"); if(!b) return;
+      const v=Number(b.dataset.v);
+      set(seg.dataset.seg, g(seg.dataset.seg,null)===v?null:v);
+      seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", String(Number(x.dataset.v)===g(seg.dataset.seg,null))));
+    });
+  });
+  sheetsEl.querySelectorAll(".acc > button").forEach(b=>{
+    b.addEventListener("click",()=>b.parentElement.classList.toggle("open"));
+  });
+  const dl=document.getElementById("dl"), cp=document.getElementById("copy");
+  if(dl) dl.addEventListener("click",doDownload);
+  if(cp) cp.addEventListener("click",doCopy);
+}
+let rT=null;
+function scheduleRefresh(){ clearTimeout(rT); rT=setTimeout(refresh,600); }
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-go]"); if(b) go(Number(b.dataset.go));
+});
+mobEl.addEventListener("change",()=>go(Number(mobEl.value)));
+document.getElementById("prev").addEventListener("click",()=>go(cur-1));
+document.getElementById("next").addEventListener("click",()=>go(cur+1));
+document.getElementById("clear").addEventListener("click",()=>{
+  if(!confirm("Apagar todas as respostas deste caderno?")) return;
+  S={}; try{localStorage.removeItem(KEY);}catch(e){}
+  renderAll(); go(0);
+});
+
+/* download / cópia */
+let downloads=null;
+(async()=>{ try{ downloads = window.claude && claude.use ? await claude.use("downloads") : null; }catch(e){ downloads=null; } })();
+
+async function doDownload(){
+  const st=document.getElementById("dlStatus");
+  const data=exportHTML();
+  const fn=`caderno-c12-julho-2026.html`;
+  if(downloads){
+    st.textContent="Aguardando a sua confirmação…";
+    try{ await downloads.save({filename:fn, data}); st.textContent="Caderno salvo. Abra o arquivo e use Imprimir → Salvar como PDF se quiser a versão impressa."; }
+    catch(err){
+      st.textContent = err && err.code==="declined" ? "Download cancelado." : "Não foi possível salvar aqui. Use “Copiar como texto” e cole no seu editor.";
+    }
+  } else {
+    try{
+      const w=window.open("","_blank");
+      if(w){ w.document.write(data); w.document.close(); st.textContent="Caderno aberto em nova aba: use Imprimir → Salvar como PDF."; }
+      else st.textContent="Não foi possível abrir o arquivo. Use “Copiar como texto”.";
+    }catch(e){ st.textContent="Não foi possível abrir o arquivo. Use “Copiar como texto”."; }
+  }
+}
+async function doCopy(){
+  const st=document.getElementById("dlStatus");
+  try{ await navigator.clipboard.writeText(exportText()); st.textContent="Conteúdo copiado. Cole no e-mail, no Word ou no App do C12."; }
+  catch(e){ st.textContent="O navegador bloqueou a cópia automática. Selecione o texto na prévia abaixo."; }
+}
+
+try{ renderAll(); go(0); }catch(e){ try{ renderAll(); }catch(e2){} }
+</script>
+</body>
+</html>
